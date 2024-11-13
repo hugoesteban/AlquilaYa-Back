@@ -97,7 +97,7 @@ export class AuthController {
       .cookie('auth_token', jwt, {
         httpOnly: true, // Evita el acceso desde JavaScript
         secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
-        sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
+        sameSite: 'strict', // 'none', 'strict', // Mejora la protección CSRF
       })
       .redirect(redirectUrl);
 
