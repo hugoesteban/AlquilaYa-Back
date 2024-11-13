@@ -97,7 +97,7 @@ export class AuthController {
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
     res
       .cookie('auth_token', jwt, {
-        httpOnly: true, // Evita el acceso desde JavaScript
+        httpOnly: false, // Evita el acceso desde JavaScript
         secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
         sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
         domain: 'alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
