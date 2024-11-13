@@ -100,7 +100,7 @@ export class AuthController {
         httpOnly: true, // Evita el acceso desde JavaScript
         secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
         sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
-        domain: 'https://alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
+        domain: 'alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
       })
       .redirect(redirectUrl);
 
