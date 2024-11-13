@@ -98,6 +98,7 @@ export class AuthController {
         httpOnly: true, // Evita el acceso desde JavaScript
         secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
         sameSite: 'strict', // 'none', 'strict', // Mejora la protección CSRF
+        domain: 'alquilaya-back-latest.onrender.com',
       })
       .redirect(redirectUrl);
 
