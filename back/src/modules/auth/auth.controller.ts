@@ -91,6 +91,8 @@ export class AuthController {
     )
       redirectUrl = URL_FRONT;
 
+    console.log('En auth controller jwt: ', jwt);
+
     // console.log(user);
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
     res
