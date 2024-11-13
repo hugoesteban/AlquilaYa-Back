@@ -92,6 +92,7 @@ export class AuthController {
       redirectUrl = URL_FRONT;
 
     console.log('En auth controller jwt: ', jwt);
+    console.log('redirectUrl: ', redirectUrl);
 
     // console.log(user);
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
@@ -102,6 +103,7 @@ export class AuthController {
         sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
         domain: 'alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
       })
+
       .redirect(redirectUrl);
 
     /*.status(HttpStatus.OK)
