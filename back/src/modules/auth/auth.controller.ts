@@ -99,8 +99,8 @@ export class AuthController {
       .cookie('auth_token', jwt, {
         httpOnly: true, // Evita el acceso desde JavaScript
         secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
-        sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
-        //domain: 'alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
+        sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
+        domain: 'https://alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
       })
       .redirect(redirectUrl);
 
