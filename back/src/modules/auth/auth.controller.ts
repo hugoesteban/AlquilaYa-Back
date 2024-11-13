@@ -95,9 +95,9 @@ export class AuthController {
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
     res
       .cookie('auth_token', jwt, {
-        httpOnly: false, // Evita el acceso desde JavaScript
-        secure: false, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
-        sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
+        httpOnly: true, // Evita el acceso desde JavaScript
+        secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
+        sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
       })
       .redirect(redirectUrl);
 
