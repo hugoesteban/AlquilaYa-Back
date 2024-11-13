@@ -34,14 +34,14 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  // const corsOptions = {
-  //   origin: 'http://localhost:3000',
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //   credentials: true,
-  // };
+  const corsOptions = {
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  };
 
   app.enableCors({
-    origin: 'https://alquilaya.vercel.app', // Permite cualquier origen
+    origin: '*', // Permite cualquier origen
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
     credentials: true, // Permite envío de cookies si es necesario
   });
