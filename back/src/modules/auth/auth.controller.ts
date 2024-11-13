@@ -94,17 +94,17 @@ export class AuthController {
     console.log('En auth controller jwt: ', jwt);
     console.log('redirectUrl: ', redirectUrl);
 
-    // console.log(user);
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
-    res
-      .cookie('auth_token', jwt, {
-        httpOnly: false, // Evita el acceso desde JavaScript
-        secure: true, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
-        sameSite: 'none', // 'none', 'strict', // Mejora la protección CSRF
-        domain: 'alquilaya.vercel.app', //'alquilaya-back-latest.onrender.com',
-      })
 
-      .redirect(redirectUrl);
+    // res
+    //   .cookie('auth_token', jwt, {
+    //     httpOnly: false, // Evita el acceso desde JavaScript
+    //     secure: false, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
+    //     sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
+    //   })
+    //   .redirect(redirectUrl);
+
+    res.redirect(redirectUrl + `?auth_token=${jwt}`);
 
     /*.status(HttpStatus.OK)
       .redirect(`http://localhost:3001/auth/google?token=${jwt}`);*/
