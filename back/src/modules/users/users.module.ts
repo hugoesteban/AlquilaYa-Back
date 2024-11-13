@@ -9,7 +9,6 @@ import { PropertyRepository } from '../property/property.repository';
 import { Property } from 'src/entities/property.entity';
 import { EmailRepository } from '../email/email.repository';
 import { Email } from 'src/entities/email.entity';
-import { requiresAuth } from 'express-openid-connect';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Property, Email])],
@@ -22,8 +21,4 @@ import { requiresAuth } from 'express-openid-connect';
     EmailRepository,
   ],
 })
-export class UsersModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(requiresAuth()).forRoutes('users/auth0/protected');
-  }
-}
+export class UsersModule {}

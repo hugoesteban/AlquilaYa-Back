@@ -45,15 +45,6 @@ export class UsersController {
   getUserByEmail(@Param('email') email: string) {
     return this.usersService.getUserByEmailService(email);
   }
-  //-----------------------------------------------------------------------------------------
-  //----------- Auth0 (GET /auth0/protected)
-  //-----------------------------------------------------------------------------------------
-  @Get('auth0/protected')
-  getAuth0Protected(@Req() req: Request) {
-    console.log('TOKEN: ', req.oidc.accessToken); //No es JWT, pero es token único generado por OpenId
-    console.log('USER: ', req.oidc.user);
-    return JSON.stringify(req.oidc);
-  }
 
   @ApiBearerAuth()
   @Put('edit')
@@ -76,9 +67,7 @@ export class UsersController {
 
   @Put('disable/:id')
   @UseGuards(AuthGuard)
-  disableUser(
-    @Param('id', ParseUUIDPipe) id: string,
-  ) {
+  disableUser(@Param('id', ParseUUIDPipe) id: string) {
     return this.usersService.disableUserService(id);
   }
 
