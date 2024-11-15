@@ -34,11 +34,11 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  app.enableCors({
-    origin: ['https://alquilaya.vercel.app/', 'http://localhost:3000'],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
-    credentials: true, // Permite envío de cookies si es necesario
-  });
+  // app.enableCors({
+  //   origin: ['https://alquilaya.vercel.app/', 'http://localhost:3000'],
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
+  //   credentials: true, // Permite envío de cookies si es necesario
+  // });
 
   // async function bootstrap() {
   //   const app = await NestFactory.create(AppModule);
@@ -48,11 +48,11 @@ async function bootstrap() {
   // }
   // bootstrap();
 
-  //   app.enableCors({
-  //     origin: 'https://alquilaya.vercel.app',
-  //     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
-  //     credentials: true,  // Permite todas las solicitudes de origen
-  // });
+  app.enableCors({
+    origin: 'https://alquilaya.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
+    credentials: true, // Permite todas las solicitudes de origen
+  });
 
   await app.listen(3001);
 }
