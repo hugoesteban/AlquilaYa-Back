@@ -16,10 +16,8 @@ export class MercadoPagoService {
         unit_price: item.unit_price,
       })),
       back_urls: {
-        success:
-          'https://alquilaya-back-latest.onrender.com/mercadopago/success',
-        failure:
-          'https://alquilaya-back-latest.onrender.com/mercadopago/failure',
+        success: `${process.env.BACK_URL}/mercadopago/success`,
+        failure: `${process.env.BACK_URL}/mercadopago/failure`,
       },
       auto_return: 'approved',
       external_reference: body.newBooking,

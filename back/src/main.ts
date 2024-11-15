@@ -2,10 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { config as auth0Config } from './config/auth0.config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   //Manejo de errores
   app.useGlobalPipes(
     new ValidationPipe({
@@ -34,25 +34,25 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
 
-  // const corsOptions = {
-  //   origin: 'http://localhost:3000',
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  //   credentials: true,
-  // };
+  app.enableCors({
+    origin: 'http://localhost:3000',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
 
   app.enableCors({
-    origin: 'https://alquilaya.vercel.app', // Permite cualquier origen
+    origin: ['https://alquilaya.vercel.app/', 'http://localhost:3000'], //'http://localhost:3000', // Permite cualquier origen
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Métodos permitidos
     credentials: true, // Permite envío de cookies si es necesario
   });
 
-  async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    app.useGlobalPipes(new ValidationPipe());
-    app.enableCors(); // Permite CORS si es necesario
-    await app.listen(3002);
-  }
-  bootstrap();
+  // async function bootstrap() {
+  //   const app = await NestFactory.create(AppModule);
+  //   app.useGlobalPipes(new ValidationPipe());
+  //   app.enableCors(); // Permite CORS si es necesario
+  //   await app.listen(3002);
+  // }
+  // bootstrap();
 
   //   app.enableCors({
   //     origin: 'https://alquilaya.vercel.app',
