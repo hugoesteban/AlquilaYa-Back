@@ -19,7 +19,7 @@ export class BookingRepository {
     private readonly bookingRepository: Repository<Booking>,
     private readonly propertyRepository: PropertyRepository,
     private readonly userRepository: UsersRepository,
-    private readonly emailService: EmailService,
+    // private readonly emailService: EmailService,
   ) {}
 
   async getBookings(page = 1, limit = 5) {
@@ -56,7 +56,11 @@ export class BookingRepository {
     };
   }
 
-  async createBooking(newBooking: CreateBookingDto, userId: string , payment : any ) {
+  async createBooking(
+    newBooking: CreateBookingDto,
+    userId: string,
+    payment: any,
+  ) {
     const propertyFind: IPropertyWithUserId =
       await this.propertyRepository.getPropertyById(newBooking.propertyId);
     if (!propertyFind) throw new BadRequestException('Property id not found');
@@ -77,12 +81,14 @@ export class BookingRepository {
       ...newBooking,
       user: userDb,
       property: propertyFind,
-      payment 
-      
+      payment,
     });
     const savedBooking = await this.bookingRepository.save(createBooking);
 
-    const formattedDateStart = format(parseISO(newBooking.dateStart), 'dd/MM/yyyy');
+    const formattedDateStart = format(
+      parseISO(newBooking.dateStart),
+      'dd/MM/yyyy',
+    );
     const formattedDateEnd = format(parseISO(newBooking.dateEnd), 'dd/MM/yyyy');
 
     // await this.propertyRepository  Necesito que llame a una funcion que agregue los dias reservados a disable days
@@ -99,9 +105,9 @@ export class BookingRepository {
 
     const { user, property, ...restBooking } = booking;
 
-    await this.emailService.sendEmailBookSuccesfully(booking.user.email,booking.id,booking.payment.id,booking.property.id)
+    // await this.emailService.sendEmailBookSuccesfully(booking.user.email,booking.id,booking.payment.id,booking.property.id)
     return {
-      booking
+      booking,
     };
   }
 
