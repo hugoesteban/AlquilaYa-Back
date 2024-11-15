@@ -79,7 +79,7 @@ export class AuthController {
     const { createdUser } = await this.authService.googleLogin(req.user);
     const user = await this.userRepository.getUserByEmail(createdUser.email);
     const jwt = await this.authService.createJwtToken(user);
-    const URL_FRONT = 'https://alquilaya.vercel.app';
+    const URL_FRONT = process.env.FRONT_URL;
     let redirectUrl: string = URL_FRONT + '/completa-tu-informacion';
     if (
       user.name &&
@@ -91,15 +91,20 @@ export class AuthController {
     )
       redirectUrl = URL_FRONT;
 
-    // console.log(user);
+    console.log('En auth controller jwt: ', jwt);
+    console.log('redirectUrl: ', redirectUrl);
+
     //res.status(HttpStatus.OK).redirect(`http://localhost:3000/`);
-    res
-      .cookie('auth_token', jwt, {
-        httpOnly: false, // Evita el acceso desde JavaScript
-        secure: false, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
-        sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
-      })
-      .redirect(redirectUrl);
+
+    // res
+    //   .cookie('auth_token', jwt, {
+    //     httpOnly: false, // Evita el acceso desde JavaScript
+    //     secure: false, //process.env.NODE_ENV === 'production', // Solo permite HTTPS en producción
+    //     sameSite: 'lax', // 'none', 'strict', // Mejora la protección CSRF
+    //   })
+    //   .redirect(redirectUrl);
+
+    res.redirect(redirectUrl + `?auth_token=${jwt}`);
 
     /*.status(HttpStatus.OK)
       .redirect(`http://localhost:3001/auth/google?token=${jwt}`);*/
